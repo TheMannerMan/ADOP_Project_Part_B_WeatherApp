@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ADOP_Project_Part_B_Weather.Views.ForecastPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="RefreshButton" Text="Refresh" Clicked="Button_Clicked" IsEnabled="True"/>
+            <ActivityIndicator x:Name="aiActivityIndicator" IsRunning="False" IsVisible="False"></ActivityIndicator>
+
+            <!-- Your XAML code to present the weather data in a ListView-->
+             
+            <ListView x:Name="GroupedForecast" IsGroupingEnabled="true" HasUnevenRows="true">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Key, StringFormat='{0:d}'}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <HorizontalStackLayout Padding="0, 5" Spacing="6">
+                                <Image Source="{Binding Icon}" Aspect="AspectFit" HeightRequest="40" WidthRequest="120"></Image>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding DateTime, StringFormat='{0:HH:mm}'}"></Label>
+                                    <Label x:Name="lblDescription" Text="{Binding Description}"></Label>
+                                    <Label x:Name="lblWeather">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Temperature: " />
+                                                <Span Text="{Binding Temperature}" />
+                                                <Span Text=", Wind: " />
+                                                <Span Text="{Binding WindSpeed}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
